@@ -100,7 +100,7 @@ def render_visual_roadmap(steps: list[str]):
                     unsafe_allow_html=True
                 )
         with col2:
-            st.markdown(f"<div style='padding-top: 8px; font-size: 1.05rem;'><strong>{step}</strong></div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='padding-top: 8px; font-size: 1.05rem; color:#1E293B;'><strong>{step}</strong></div>", unsafe_allow_html=True)
 
 def create_concise_pdf(data: dict) -> bytes:
     def clean(text):
@@ -284,11 +284,12 @@ if st.session_state.page == "form":
 
     st.subheader("Your Information")
 
-    col1, col2 = st.columns(2)
-    with col1:
-        name = st.text_input("Name (optional)")
-    with col2:
-        timeline = st.selectbox("Timeline", ["1–2 years", "2–3 years", "3–4 years", "Flexible"])
+    name = st.text_input("Name (optional)")
+
+    timeline = st.selectbox(
+        "Timeline",
+        ["1–2 years", "2–3 years", "3–4 years", "Flexible"]
+    )
 
     background = st.text_area(
         "Background & Experience",
@@ -392,7 +393,6 @@ elif st.session_state.page == "results" and st.session_state.pathway_data:
     </div>
     """, unsafe_allow_html=True)
 
-    # ---------- WHY VIEW ----------
     if st.session_state.results_view == "why":
         if data.get("why"):
             st.markdown(f"""
@@ -427,7 +427,6 @@ elif st.session_state.page == "results" and st.session_state.pathway_data:
                 st.session_state.results_view = "jobs"
                 st.rerun()
 
-    # ---------- ROADMAP ----------
     elif st.session_state.results_view == "roadmap":
         if st.button("← Back"):
             st.session_state.results_view = "why"
@@ -439,7 +438,6 @@ elif st.session_state.page == "results" and st.session_state.pathway_data:
         else:
             st.info("No roadmap steps generated.")
 
-    # ---------- SKILLS ----------
     elif st.session_state.results_view == "skills":
         if st.button("← Back"):
             st.session_state.results_view = "why"
@@ -457,6 +455,7 @@ elif st.session_state.page == "results" and st.session_state.pathway_data:
                         padding:0.9rem 1.1rem;
                         margin-bottom:0.65rem;
                         font-size:1rem;
+                        color:#1E293B;
                     ">📘 {prog}</div>
                     """, unsafe_allow_html=True)
         with col_b:
@@ -471,10 +470,10 @@ elif st.session_state.page == "results" and st.session_state.pathway_data:
                         padding:0.9rem 1.1rem;
                         margin-bottom:0.65rem;
                         font-size:1rem;
+                        color:#1E293B;
                     ">🛠️ {skill}</div>
                     """, unsafe_allow_html=True)
 
-    # ---------- JOBS ----------
     elif st.session_state.results_view == "jobs":
         if st.button("← Back"):
             st.session_state.results_view = "why"
@@ -493,6 +492,8 @@ elif st.session_state.page == "results" and st.session_state.pathway_data:
                         text-align:center;
                         border:1px solid #CCFBF1;
                         font-size:1rem;
+                        color:#134E4A;
+                        font-weight:500;
                     ">{job}</div>
                     """, unsafe_allow_html=True)
             st.write("")
@@ -508,6 +509,7 @@ elif st.session_state.page == "results" and st.session_state.pathway_data:
                     margin-bottom:0.55rem;
                     border-left:4px solid #0F766E;
                     font-size:1rem;
+                    color:#1E293B;
                 "><strong>{i}.</strong> {action}</div>
                 """, unsafe_allow_html=True)
 
